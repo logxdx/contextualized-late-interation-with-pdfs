@@ -596,11 +596,19 @@ class RAG:
         query: str,
         top_k: int = 2,
         prefetch_limit: int = 10,
-        model_name: str = "gemma3",
-        api_key: str = "ollama",
-        base_url: str = "http://localhost:11434/v1",
+        model_name: Optional[str] = None,
+        api_key: Optional[str] = None,
+        base_url: Optional[str] = None,
         with_images: bool = False,
     ):
+        if not api_key:
+            api_key = os.getenv("API_KEY", "ollama")
+        if not base_url:
+            base_url = os.getenv("BASE_URL", "http://localhost:11434/v1")
+        if not model_name:
+            model_name = os.getenv("MODEL_NAME", "gemma3")
+
+
         queries = self.model.encode_queries(query)
         points = self.vector_store.search(
             queries=queries,
@@ -619,7 +627,7 @@ class RAG:
         - Do not hallucinate or make assumptions beyond the visible data.
         - If the image contains tables, diagrams, or equations, interpret them accurately.
         
-        Your job is to provide an accurate and concise answer to the user's question based on the provided context.
+        Your job is to provide an accurate and detailed answer to the user's question based on the provided context.
         """
         )
 
@@ -703,9 +711,6 @@ if __name__ == "__main__":
         query="How does multi headed attention work?",
         top_k=4,
         prefetch_limit=10,
-        api_key=os.getenv("POLLINATIONS_API_KEY"),  # type: ignore
-        base_url=os.getenv("POLLINATIONS_BASE_URL"),  # type: ignore
-        model_name="openai-fast",
     )
 
     rag.close()
