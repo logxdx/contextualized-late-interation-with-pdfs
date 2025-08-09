@@ -113,8 +113,8 @@ flowchart TD
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/logxdx/visual-rag-pdf.git
-   cd visual-rag-pdf
+   git clone https://github.com/logxdx/contextualized-late-interation-with-pdfs.git
+   cd contextualized-late-interation-with-pdfs
     ```
 
 2. **Create and activate a virtual environment**
@@ -164,7 +164,7 @@ flowchart TD
 ## 📂 Project Structure
 
 ```
-visual-rag-pdf/
+contextualized-late-interation-with-pdfs/
 │
 ├── rag.py              # Core RAG backend logic
 ├── app.py              # Streamlit UI
