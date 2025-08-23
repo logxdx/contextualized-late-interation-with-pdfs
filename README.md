@@ -1,7 +1,7 @@
 # 📄 PDF Search with Late Interaction
 
 A fully local **Retrieval-Augmented Generation (RAG)** pipeline for **PDF search and question answering**.  
-It uses **Late Interaction** with **ColPali / ColQwen / ColSmol** family of vision-language models for encoding PDF page images, stores embeddings in **Qdrant**, and answers queries using an **LLM** with retrieved context.
+It uses **Late Interaction** with **ColPali / ColQwen / ColSmol** family of models for encoding PDF page images, stores embeddings in **Qdrant**, and answers queries using a **VLM** with retrieved context.
 
 This project includes an **interactive Streamlit web app** to index PDFs and ask questions.
 
@@ -9,6 +9,7 @@ This project includes an **interactive Streamlit web app** to index PDFs and ask
 
 ## 🚀 Features
 
+<<<<<<< HEAD
 -   **Multi-Vector embedding** of PDF pages.
 -   **Vector search** powered by Qdrant with multi-vector support:
     -   Original embeddings
@@ -18,6 +19,14 @@ This project includes an **interactive Streamlit web app** to index PDFs and ask
 -   **Question answering** using retrieved context images.
 -   **Local or remote LLMs** via [LiteLLM](https://github.com/BerriAI/litellm) API compatibility.
 -   **Streamlit UI** for user-friendly PDF upload and querying.
+=======
+- **Multi-Vector embedding** of PDF pages.
+- **Vector search** powered by Qdrant with multi-vector support
+- **Batch PDF indexing** (folder or individual files).
+- **Question answering** using retrieved context images.
+- **Local or remote LLMs** via [LiteLLM](https://github.com/BerriAI/litellm) API compatibility.
+- **Streamlit UI** for user-friendly PDF upload and querying.
+>>>>>>> 11ddc452627c33709e280096ca773fc83b667723
 
 ---
 
