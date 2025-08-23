@@ -9,24 +9,12 @@ This project includes an **interactive Streamlit web app** to index PDFs and ask
 
 ## 🚀 Features
 
-<<<<<<< HEAD
--   **Multi-Vector embedding** of PDF pages.
--   **Vector search** powered by Qdrant with multi-vector support:
-    -   Original embeddings
-    -   Mean pooling over image rows
-    -   Mean pooling over image columns
--   **Batch PDF indexing** (folder or individual files).
--   **Question answering** using retrieved context images.
--   **Local or remote LLMs** via [LiteLLM](https://github.com/BerriAI/litellm) API compatibility.
--   **Streamlit UI** for user-friendly PDF upload and querying.
-=======
 - **Multi-Vector embedding** of PDF pages.
 - **Vector search** powered by Qdrant with multi-vector support
 - **Batch PDF indexing** (folder or individual files).
 - **Question answering** using retrieved context images.
 - **Local or remote LLMs** via [LiteLLM](https://github.com/BerriAI/litellm) API compatibility.
 - **Streamlit UI** for user-friendly PDF upload and querying.
->>>>>>> 11ddc452627c33709e280096ca773fc83b667723
 
 ---
 
@@ -34,23 +22,21 @@ This project includes an **interactive Streamlit web app** to index PDFs and ask
 
 ### Uses a two-stage retrieval pipeline for faster queries without losing accuracy:
 
-1. **_Prefetch (Fast Retrieval)_** – Query pooled embeddings to quickly fetch top-K candidates from Qdrant.
+1. ***Prefetch (Fast Retrieval)*** – Query pooled embeddings to quickly fetch top-K candidates from Qdrant.
 
-2. **_Rerank (High Accuracy)_** – Pass candidates to ColPali, ColQwen, or ColSmol models for late-interaction reranking.
+2. ***Rerank (High Accuracy)*** – Pass candidates to ColPali, ColQwen, or ColSmol models for late-interaction reranking.
 
 ### Pros:
 
--   Faster response times.
--   Higher relevance with model-based reranking.
+* Faster response times.
+* Higher relevance with model-based reranking.
 
 ### Cons:
-
--   Requires extra storage for pooled embeddings.
+* Requires extra storage for pooled embeddings.
 
 ## 📊 Visual Representation of the Pipeline
 
 ### Sequence Diagram
-
 ```mermaid
 sequenceDiagram
     %% Define participants in lanes
@@ -83,7 +69,6 @@ sequenceDiagram
 ```
 
 ### Flowchart
-
 ```mermaid
 flowchart TD
     %% INDEXING STAGE
@@ -115,64 +100,61 @@ flowchart TD
 
 ## 🛠 Requirements
 
--   A supported GPU (CUDA or MPS) is recommended for faster performance.
--   Installed system dependencies for:
-    -   **poppler** (required by `pdf2image`)
+- A supported GPU (CUDA or MPS) is recommended for faster performance.
+- Installed system dependencies for:
+  - **poppler** (required by `pdf2image`)
 
 ---
 
 ## 📦 Installation
 
 1. **Clone the repository**
-
-    ```bash
-    git clone https://github.com/logxdx/contextualized-late-interation-with-pdfs.git
-    cd contextualized-late-interation-with-pdfs
+   ```bash
+   git clone https://github.com/logxdx/contextualized-late-interation-with-pdfs.git
+   cd contextualized-late-interation-with-pdfs
     ```
 
 2. **Create and activate a virtual environment**
 
-    ```bash
-    python -m venv .venv
-    source .venv/bin/activate   # On Windows: .venv\Scripts\activate
-    ```
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate   # On Windows: .venv\Scripts\activate
+   ```
 
 3. **Install dependencies**
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 4. **Install Poppler**
 
-    - **Linux (Debian/Ubuntu)**:
+   * **Linux (Debian/Ubuntu)**:
 
-        ```bash
-        sudo apt-get install poppler-utils
-        ```
+     ```bash
+     sudo apt-get install poppler-utils
+     ```
+   * **macOS**:
 
-    - **macOS**:
+     ```bash
+     brew install poppler
+     ```
+   * **Windows**:
 
-        ```bash
-        brew install poppler
-        ```
-
-    - **Windows**:
-
-        - Download from: [https://github.com/oschwartz10612/poppler-windows/releases/](https://github.com/oschwartz10612/poppler-windows/releases/)
-        - Add `bin` folder to your `PATH`.
+     * Download from: [https://github.com/oschwartz10612/poppler-windows/releases/](https://github.com/oschwartz10612/poppler-windows/releases/)
+     * Add `bin` folder to your `PATH`.
 
 5. **Configure environment variables**
    Create a `.env` file in the project root:
 
-    ```env
-    # API key & URL for your LLM provider (ollama by default)
-    API_KEY=your_api_key_here
-    BASE_URL=http://localhost:11434/v1
+   ```env
+   # API key & URL for your LLM provider (ollama by default)
+   API_KEY=your_api_key_here
+   BASE_URL=http://localhost:11434/v1
 
-    # Optional Hugging Face token if model access is gated
-    HF_TOKEN=your_hf_token_here
-    ```
+   # Optional Hugging Face token if model access is gated
+   HF_TOKEN=your_hf_token_here
+   ```
 
 ---
 
@@ -225,10 +207,10 @@ streamlit run app.py
 
 **Main Tabs**:
 
--   **📥 Index PDFs**
-    Upload PDF files or specify a folder to index.
--   **❓ Ask Questions**
-    Enter your query and get an answer with retrieved page previews.
+* **📥 Index PDFs**
+  Upload PDF files or specify a folder to index.
+* **❓ Ask Questions**
+  Enter your query and get an answer with retrieved page previews.
 
 ---
 
@@ -236,43 +218,43 @@ streamlit run app.py
 
 1. **PDF Processing**
 
-    - PDFs are converted to images (`pdf2image`).
-    - Images are encoded into embeddings using **ColPali / ColQwen / ColSmol** models.
+   * PDFs are converted to images (`pdf2image`).
+   * Images are encoded into embeddings using **ColPali / ColQwen / ColSmol** models.
 
 2. **Vector Storage**
 
-    - Embeddings are stored in **Qdrant** with three vector fields:
+   * Embeddings are stored in **Qdrant** with three vector fields:
 
-        - `original`
-        - `mean_pooling_rows`
-        - `mean_pooling_columns`
+     * `original`
+     * `mean_pooling_rows`
+     * `mean_pooling_columns`
 
 3. **Retrieval**
 
-    - For a query, text is embedded.
-    - Qdrant searches across all three vector types.
-    - Top matches (pages) are retrieved.
+   * For a query, text is embedded.
+   * Qdrant searches across all three vector types.
+   * Top matches (pages) are retrieved.
 
 4. **Answer Generation**
 
-    - Retrieved pages are sent as **image+text context** to an LLM.
-    - The LLM answers based only on the given images.
+   * Retrieved pages are sent as **image+text context** to an LLM.
+   * The LLM answers based only on the given images.
 
 ---
 
 ## ⚡ Performance Notes
 
--   Use **GPU** for significant speedup.
--   Increase `batch_size` when indexing for faster throughput.
--   Reduce `dpi` in `_pdf_to_image` for lower memory use.
+* Use **GPU** for significant speedup.
+* Increase `batch_size` when indexing for faster throughput.
+* Reduce `dpi` in `_pdf_to_image` for lower memory use.
 
 ---
 
 ## 🛡️ Troubleshooting
 
--   **CUDA out of memory**: Reduce `batch_size` or use `torch.float16`.
--   **Poppler not found**: Install via your OS package manager.
--   **Model access denied**: Accept the model’s terms on Hugging Face and set `HF_TOKEN`.
+* **CUDA out of memory**: Reduce `batch_size` or use `torch.float16`.
+* **Poppler not found**: Install via your OS package manager.
+* **Model access denied**: Accept the model’s terms on Hugging Face and set `HF_TOKEN`.
 
 ---
 
@@ -284,8 +266,8 @@ This project is released under the **MIT License**.
 
 ## 🙌 Acknowledgments
 
--   [ColPali Engine](https://github.com/illuin-tech/colpali)
--   [Qdrant](https://qdrant.tech/)
--   [LiteLLM](https://github.com/BerriAI/litellm)
--   [Streamlit](https://streamlit.io)
--   [pdf2image](https://github.com/Belval/pdf2image)
+* [ColPali Engine](https://github.com/illuin-tech/colpali)
+* [Qdrant](https://qdrant.tech/)
+* [LiteLLM](https://github.com/BerriAI/litellm)
+* [Streamlit](https://streamlit.io)
+* [pdf2image](https://github.com/Belval/pdf2image)
